@@ -1,27 +1,26 @@
 
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
-import { FaTimesCircle } from 'react-icons/fa';
+import { FaTimesCircle, FaPlusCircle, FaMinusCircle} from 'react-icons/fa';
 const ExpenseItem = (props) => {
-    const { dispatch, Location} = useContext(AppContext);
+    const { dispatch, Currency} = useContext(AppContext);
+    
     const handleDeleteItem = () => {
-        const item = {
-            name: props.name,
-        };
+
         dispatch({
             type: 'DELETE_ITEM',
-            payload: item,
+            payload: props.id
         });
     };
 
     const IncreaseBy10 = (name) => {
         const expense = {
             name: name,
-            cost: 10,
+            cost : 10,
         };
         dispatch({
             type: 'ADD_EXPENSE',
-            payload: expense
+            payload: expense 
         });
 
     };
@@ -32,18 +31,16 @@ const ExpenseItem = (props) => {
         };
         dispatch({
             type: 'RED_EXPENSE',
-            payload: expense
+            payload: expense 
         });
     }
 
     return (
         <tr>
         <td>{props.name}</td>
-        <td>{props.quantity}</td>
-        <td>{Location}{parseInt(props.unitprice)}</td>
-        <td>{Location}{parseInt(props.quantity)*parseInt(props.unitprice)}</td>
-        <td><FaTimesCircle size='2.2em' color="green" onClick={IncreaseBy10}></FaTimesCircle></td>
-        <td><FaTimesCircle size='2.2em' color="red" onClick={DecresesBy10}></FaTimesCircle></td>
+        <td>{Currency}{props.cost}</td>
+        <td><FaPlusCircle size='2.2em' color="green" onClick={event => IncreaseBy10(props.name)}></FaPlusCircle></td>
+        <td><FaMinusCircle size='2.2em' color="red" onClick={event => DecresesBy10(props.name)}></FaMinusCircle></td>
         <td><FaTimesCircle size='1.1em' color="gray" onClick={handleDeleteItem}></FaTimesCircle></td>
         </tr>
     );

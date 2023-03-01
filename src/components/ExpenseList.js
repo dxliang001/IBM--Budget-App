@@ -16,7 +16,7 @@ const ExpenseList = () => {
           </thead>
             <tbody>
             {expenses.map((expense) => (
-                <ExpenseItem id={expense.id} key={expense.id} name={expense.name} quantity={expense.quantity} unitprice={expense.unitprice} />
+                <ExpenseItem id={expense.id} key={expense.id} name={expense.name} cost={expense.cost} />
             ))}
             </tbody>
         </table>
